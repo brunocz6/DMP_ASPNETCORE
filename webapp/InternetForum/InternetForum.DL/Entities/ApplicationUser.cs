@@ -16,5 +16,15 @@ namespace InternetForum.DL.Entities
 			// Add custom user claims here
 			return userIdentity;
 		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje URL adresu profilového obrázku.
+		/// </summary>
+		public string AvatarURL { get; set; }
+
+		/// <summary>
+		/// Vrací nebo nastavuje kolekci příspevků tohoto uživatele.
+		/// </summary>
+		public virtual ICollection<Post> Posts { get; set; }
 	}
 }

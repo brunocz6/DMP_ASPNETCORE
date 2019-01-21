@@ -1,5 +1,8 @@
 ﻿@using InternetForum.Views.Manage
+@using InternetForum.DL.Entities
+
 @inject SignInManager<ApplicationUser> SignInManager
+
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

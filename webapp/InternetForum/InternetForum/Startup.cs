@@ -28,11 +28,20 @@ namespace InternetForum
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddDbContext<InternetForumDbContext>(options =>
-				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+				options
+					.UseLazyLoadingProxies()
+					.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 			services.AddIdentity<ApplicationUser, IdentityRole>()
 				.AddEntityFrameworkStores<InternetForumDbContext>()
 				.AddDefaultTokenProviders();
+
+			services.AddAuthentication()
+				.AddFacebook(facebookOptions =>
+				{
+					facebookOptions.AppId = "1955015674620090";
+					facebookOptions.AppSecret = "0354fd7b50e4a85583e4016b5b065418";
+				});
 
 			// Add application services.
 			services.AddTransient<IEmailSender, EmailSender>();

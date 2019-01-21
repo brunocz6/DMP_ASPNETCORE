@@ -43,6 +43,9 @@ namespace InternetForum
 					facebookOptions.AppSecret = "0354fd7b50e4a85583e4016b5b065418";
 				});
 
+			// Přidání UnitOfWork do Service Provideru
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 			// Add application services.
 			services.AddTransient<IEmailSender, EmailSender>();
 

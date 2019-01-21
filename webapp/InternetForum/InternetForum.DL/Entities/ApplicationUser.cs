@@ -23,6 +23,11 @@ namespace InternetForum.DL.Entities
 		public string AvatarURL { get; set; }
 
 		/// <summary>
+		/// Vrací nebo nastavuje kolekci komentářů vytvořených tímto uživatelem.
+		/// </summary>
+		public virtual ICollection<Comment> Comments { get; set; }
+
+		/// <summary>
 		/// Vrací nebo nastavuje kolekci příspevků tohoto uživatele.
 		/// </summary>
 		public virtual ICollection<Post> Posts { get; set; }

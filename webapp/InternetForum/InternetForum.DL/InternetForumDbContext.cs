@@ -16,10 +16,17 @@ namespace InternetForum.DL
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder
+				.Entity<Comment>()
+					.HasOne(e => e.Author)
+					.WithMany()
+					.OnDelete(DeleteBehavior.Restrict);
+
 			base.OnModelCreating(modelBuilder);
 		}
 
 		public DbSet<Post> Posts { get; set; }
+		public DbSet<Comment> Comments { get; set; }
 		public DbSet<ForumThread> ForumThreads { get; set; }
 	}
 }

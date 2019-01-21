@@ -18,5 +18,8 @@ namespace InternetForum.DL
 		{
 			base.OnModelCreating(modelBuilder);
 		}
+
+		public DbSet<Post> Posts { get; set; }
+		public DbSet<ForumThread> ForumThreads { get; set; }
 	}
 }

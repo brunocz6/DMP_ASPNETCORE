@@ -1,18 +1,24 @@
 @using Microsoft.AspNetCore.Identity
-@using InternetForum.DL.Entities;
+@using InternetForum.DL.Entities
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {
-	<form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-		<ul class="nav navbar-nav navbar-right">
-			<li>
-				<a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-			</li>
-			<li>
-				<button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+	<form asp-action="Logout" asp-controller="Account" method="post" class="navbar-right">
+		<ul class="navbar-nav pull-right">
+			<li class="nav-item dropdown">
+				<a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown">
+					Vítej, <b class="caret">@UserManager.GetUserName(User)</b>
+				</a>
+				<div class="dropdown-menu">
+					<a asp-action="Index" asp-controller="Manage" class="dropdown-item"> Nastavení </a>
+					<a asp-action="MyPosts" asp-controller="Post" class="dropdown-item"> Moje pøíspìvky </a>
+					<hr />
+
+					<button type="submit" class="btn btn-link dropdown-item">Odhlásit se</button>
+				</div>
 			</li>
 		</ul>
 	</form>
@@ -20,7 +26,11 @@
 else
 {
 	<ul class="nav navbar-nav navbar-right">
-		<li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-		<li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+		<li class="nav-item">
+			<a asp-action="Register" asp-controller="Account" class="nav-link"> Registrace </a>
+		</li>
+		<li class="nav-item">
+			<a asp-action="Login" asp-controller="Account" class="nav-link"> Pøihlásit se </a>
+		</li>
 	</ul>
 }

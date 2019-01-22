@@ -41,7 +41,8 @@ namespace InternetForum.Controllers
 		[HttpPost]
 		public IActionResult Create(CreatePostViewModel model)
 		{
-			var post = model.CreateEntity(GetCurrentUser().Id);
+			var forumThreadId = this.unitOfWork.ForumThreadRepository.FirstOrDefault().Id;
+			var post = model.CreateEntity(GetCurrentUser().Id, forumThreadId);
 
 			this.unitOfWork.PostRepository.Add(post);
 			this.unitOfWork.Save();
@@ -94,7 +95,7 @@ namespace InternetForum.Controllers
 		{
 			var post = this.unitOfWork.PostRepository.GetById(id);
 
-			if (post != null)
+			if (post != null && post.Author.Id == GetCurrentUserId())
 			{
 				this.unitOfWork.PostRepository.Remove(post);
 				this.unitOfWork.Save();

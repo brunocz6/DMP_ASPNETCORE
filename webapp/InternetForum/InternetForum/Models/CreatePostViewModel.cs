@@ -28,18 +28,13 @@ namespace InternetForum.Models
 		public string Body { get; set; }
 
 		/// <summary>
-		/// Vrací nebo nastavuje, kterého vlákna je příspěvek součástí.
-		/// </summary>
-		public int ForumThreadId { get; set; }
-
-		/// <summary>
 		/// Vrací nově vytvořenou entitu typu <see cref="Post"/> naplněnou daty z tohoto ViewModelu.
 		/// </summary>
 		/// <param name="entity">DB entita příspěvku</param>
 		/// <returns>Příspěvek typu <see cref="Post"/></returns>
-		public Post CreateEntity(string authorId)
+		public Post CreateEntity(string authorId, int forumThreadId)
 		{
-			return Post.Create(this.Title, this.Body, DateTime.Now, authorId, this.ForumThreadId);
+			return Post.Create(this.Title, this.Body, DateTime.Now, authorId, forumThreadId);
 		}
 	}
 }

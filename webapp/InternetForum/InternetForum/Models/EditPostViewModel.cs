@@ -21,12 +21,14 @@ namespace InternetForum.Models
 		/// Vrací nebo nastavuje nadpis příspěvku.
 		/// </summary>
 		[MaxLength(100)]
+		[Display(Name = "Nadpis")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Vrací nebo nastavuje obsah příspěvku.
 		/// </summary>
 		[MaxLength(2000)]
+		[Display(Name = "Obsah")]
 		public string Body { get; set; }
 
 		/// <summary>

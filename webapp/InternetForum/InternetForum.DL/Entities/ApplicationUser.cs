@@ -9,6 +9,16 @@ namespace InternetForum.DL.Entities
 {
 	public class ApplicationUser : IdentityUser, IEntity<string>
 	{
+		public ApplicationUser()
+		{
+
+		}
+
+		public ApplicationUser(string name, string email)
+		{
+
+		}
+
 		public async Task<IdentityResult> GenerateUserIdentityAsync(AspNetUserManager<ApplicationUser> manager)
 		{
 			// Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

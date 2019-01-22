@@ -53,7 +53,8 @@ namespace InternetForum
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider,
+			UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
 		{
 			if (env.IsDevelopment())
 			{
@@ -65,6 +66,9 @@ namespace InternetForum
 			{
 				app.UseExceptionHandler("/Home/Error");
 			}
+
+			// Vložení defaultních dat do databáze...
+			DatabaseInitializer.Seed(userManager, roleManager, serviceProvider.GetRequiredService<InternetForumDbContext>());
 
 			app.UseStaticFiles();
 

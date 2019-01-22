@@ -14,6 +14,12 @@ namespace InternetForum.Models
 
 		public LinkViewModel(int id, string text)
 		{
+			this.Id = id.ToString();
+			this.Text = text;
+		}
+
+		public LinkViewModel(string id, string text)
+		{
 			this.Id = id;
 			this.Text = text;
 		}
@@ -21,7 +27,7 @@ namespace InternetForum.Models
 		/// <summary>
 		/// Vrací nebo nastavuje Id parametr.
 		/// </summary>
-		public int Id { get; set; }
+		public string Id { get; set; }
 
 		/// <summary>
 		/// Vrací nebo nastavuje text odkazu.

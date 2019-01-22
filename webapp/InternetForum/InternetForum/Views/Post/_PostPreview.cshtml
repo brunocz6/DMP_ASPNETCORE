@@ -1,0 +1,29 @@
+﻿@model InternetForum.Models.PostPreviewViewModel
+
+<div class="row postPreviewContainer">
+	<div class="col-sm-12">
+		<div class="card redirector" data-url="@("/Post/Detail/" + Model.Id)">
+			<div class="card-body">
+
+				<div class="row">
+					<div class="col-sm-9">
+						<h6>
+							<a #>@Model.ForumThreadLink.Text</a>
+							@*<a asp-action="Index" asp-controller="ForumThread" asp-route-id="@Model.ForumThreadLink.Id">@Model.ForumThreadLink.Text</a>*@
+							<small>
+								• Nahráno @Model.CreatedAt uživatelem
+								<a #>@Model.AuthorLink.Text</a>
+								@*<a asp-action="Detail" asp-controller="User" asp-route-id="@Model.AuthorLink.Id">@Model.AuthorLink.Text</a>*@
+							</small>
+						</h6>
+					</div>
+					<div class="col-sm-3">
+					</div>
+				</div>
+
+				<h5 class="card-title">@Model.Title</h5>
+				<p class="card-text">@Model.Body</p>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using PagedList.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace InternetForum.DL.Repositories.Interfaces
@@ -44,6 +46,18 @@ namespace InternetForum.DL.Repositories.Interfaces
 		/// Vrací první záznam z databáze nebo null.
 		/// </summary>
 		TEntity FirstOrDefault();
+
+		/// <summary>
+		/// Vrací záznamy odpovídající query.
+		/// </summary>
+		IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+
+		/// <summary>
+		/// Vrací záznamy odpovídající dané query (s možností stránkování).
+		/// </summary>
+		/// <param name="pageNumber">Číslo stránky</param>
+		/// <param name="pageSize">Velikost stránky</param>
+		IPagedList<TEntity> Find(Expression<Func<TEntity, bool>> predicate, int pageNumber, int pageSize);
 
 		/// <summary>
 		/// Vrátí query se všemi záznami.

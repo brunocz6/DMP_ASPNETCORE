@@ -1,1 +1,20 @@
-﻿
+﻿@model InternetForum.Models.HomeIndexViewModel
+
+@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+	<div class="col-md-9 pull-left">
+		@foreach (var post in Model.Posts)
+		{
+			Html.RenderPartial("~/Views/Post/_PostPreview.cshtml", post);
+		}
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(".redirector").click(function () {
+		window.location = this.dataset.url;
+	});
+</script>

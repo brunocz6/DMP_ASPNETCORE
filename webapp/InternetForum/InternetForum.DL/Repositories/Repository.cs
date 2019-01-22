@@ -1,8 +1,10 @@
 ﻿using InternetForum.DL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using PagedList.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace InternetForum.DL.Repositories
@@ -53,10 +55,16 @@ namespace InternetForum.DL.Repositories
 			return query;
 		}
 
-		public IQueryable<TEntity> Find(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+		public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
 		{
 			IQueryable<TEntity> query = this.dbContext.Set<TEntity>().Where(predicate);
 			return query;
+		}
+
+		public IPagedList<TEntity> Find(Expression<Func<TEntity, bool>> predicate, int pageNumber, int pageSize)
+		{
+			return Find(predicate)
+				.ToPagedList(pageNumber, pageSize);
 		}
 
 		public virtual void Update(TEntity entity)

@@ -1,4 +1,10 @@
 ﻿@model InternetForum.Models.PostViewModel
+
+
+@using ReflectionIT.Mvc.Paging;
+
+@addTagHelper *, ReflectionIt.Mvc.Paging
+
 @{
 	ViewData["Title"] = Model.Title;
 }
@@ -40,33 +46,40 @@
 					</div>
 				</form>
 
-				<br />
+				@if (Model.Comments.Any())
+				{
+					<br />
 
-				<h6>Komentáře: </h6>
+					<h6>Komentáře: </h6>
 
-				<div>
-					@foreach (var comment in Model.Comments)
-					{
-						Html.RenderPartial("~/Views/Comment/_CommentPartial.cshtml", comment);
-					}
-				</div>
+					<div>
+						@foreach (var comment in Model.Comments)
+						{
+							Html.RenderPartial("~/Views/Comment/_CommentPartial.cshtml", comment);
+						}
+					</div>
+				}
+
+				<nav>
+					@await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.Comments, @class = "" })
+				</nav>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-3">
 		@*<div class="container forumThreadBasicInfoPanel">
-			@{
-				Html.RenderPartial(
-					"~/Views/ForumThread/_InfoPanel.cshtml",
-					new ForumThreadInfoPanelViewModel(
-						Model.ForumThread.Id,
-						Model.ForumThread.Name,
-						Model.ForumThread.Description,
-						ViewBag.ShowSubscribeButton,
-						Model.ForumThread.SubscribersCount
-					)
-				);
-			}
-		</div>*@
+				@{
+					Html.RenderPartial(
+						"~/Views/ForumThread/_InfoPanel.cshtml",
+						new ForumThreadInfoPanelViewModel(
+							Model.ForumThread.Id,
+							Model.ForumThread.Name,
+							Model.ForumThread.Description,
+							ViewBag.ShowSubscribeButton,
+							Model.ForumThread.SubscribersCount
+						)
+					);
+				}
+			</div>*@
 	</div>
 </div>

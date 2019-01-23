@@ -71,14 +71,16 @@ namespace InternetForum.Controllers
 			return RedirectToAction("Index", "Home", null);
 		}
 
-		public IActionResult Detail(int id, int commentsPageNumber = 1)
+		public IActionResult Detail(int id, int page = 1)
 		{
 			var post = this.unitOfWork.PostRepository.GetById(id);
 
 			if (post == null)
 				return NotFound();
 
-			var model = PostViewModel.CreateFromEntity(post, commentsPageNumber, 15);
+			var model = PostViewModel.CreateFromEntity(post, page, 10);
+
+			model.Comments.Action = nameof(Detail);
 
 			return View(model);
 		}

@@ -8,16 +8,20 @@
 	ViewData["Title"] = "Home Page";
 }
 
-<h6> @Model.ForumThreadName </h6>
-
 <div class="row">
 	<div class="col-md-9 pull-left">
+		@* List příspevků na aktuální stránce *@
 		@foreach (var post in Model.Posts)
 		{
 			Html.RenderPartial("~/Views/Post/_PostPreview.cshtml", post);
 		}
 	</div>
 	<div class="col-md-3">
+
+		@* Panel s informaci o aktuálním vlákně *@
+		@{ Html.RenderPartial("~/Views/ForumThread/_ForumThreadInfoPanelPartial.cshtml", Model.CurrentForumThread); }
+
+		@* Seznam dostupných vláken příspěvků *@
 		<div class="card">
 			<div class="card-header text-white" style="background-color: #343a40;">
 				Vlákna příspěvků
@@ -36,7 +40,7 @@
 	</div>
 </div>
 
-
+@* Stránkování příspěvků *@
 <nav>
 	@await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.Posts })
 </nav>

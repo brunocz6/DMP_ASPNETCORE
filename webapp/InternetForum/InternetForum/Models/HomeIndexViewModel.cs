@@ -15,17 +15,17 @@ namespace InternetForum.Models
 		}
 
 		public HomeIndexViewModel(PagingList<PostPreviewViewModel> posts,
-			IEnumerable<ForumThreadInfoViewModel> forumThreads, string forumThreadName)
+			IEnumerable<ForumThreadInfoViewModel> forumThreads, ForumThreadInfoPanelViewModel forumThread)
 		{
 			this.Posts = posts;
 			this.ForumThreads = forumThreads;
-			this.ForumThreadName = forumThreadName;
+			this.CurrentForumThread = forumThread;
 		}
 
 		/// <summary>
 		/// Vrací nebo nastavuje název vlákna příspěvků.
 		/// </summary>
-		public string ForumThreadName { get; set; }
+		public ForumThreadInfoPanelViewModel CurrentForumThread { get; set; }
 
 		/// <summary>
 		/// Vrací nebo nastavuje kolekci základních informací o vláknech příspěvků.

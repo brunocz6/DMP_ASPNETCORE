@@ -25,6 +25,8 @@ namespace InternetForum.Controllers
 				? this.unitOfWork.ForumThreadRepository.GetById(forumThreadId.Value)
 				: this.unitOfWork.ForumThreadRepository.FirstOrDefault();
 
+			var forumThreadInfoPanelViewModel = new ForumThreadInfoPanelViewModel(forumThread.Id, forumThread.Name, forumThread.Description);
+
 			var forumThreadsViewModels = this.unitOfWork.ForumThreadRepository
 				.GetAll()
 				.ToList()
@@ -37,7 +39,7 @@ namespace InternetForum.Controllers
 
 			var pagedPosts = PagingList.Create(postsViewModels, 10, page);
 
-			var model = new HomeIndexViewModel(pagedPosts, forumThreadsViewModels, forumThread.Name);
+			var model = new HomeIndexViewModel(pagedPosts, forumThreadsViewModels, forumThreadInfoPanelViewModel);
 
 			return View(model);
 		}

@@ -35,6 +35,11 @@ namespace InternetForum.DL.Entities
 		public string Description { get; set; }
 
 		/// <summary>
+		/// Vrací nebo nastavuje odběratele tohoto vlákna.
+		/// </summary>
+		public virtual IEnumerable<ForumThreadUser> Subscribers { get; set; }
+
+		/// <summary>
 		/// Vrací nebo nastavuje příspěvky, které jsou součástí tohoto vlákna.
 		/// </summary>
 		public virtual IEnumerable<Post> Posts { get; set; }

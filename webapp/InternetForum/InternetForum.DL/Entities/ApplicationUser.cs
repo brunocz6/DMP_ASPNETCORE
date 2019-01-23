@@ -28,14 +28,14 @@ namespace InternetForum.DL.Entities
 		}
 
 		/// <summary>
-		/// Vrací nebo nastavuje URL adresu profilového obrázku.
-		/// </summary>
-		public string AvatarURL { get; set; }
-
-		/// <summary>
 		/// Vrací nebo nastavuje kolekci komentářů vytvořených tímto uživatelem.
 		/// </summary>
 		public virtual ICollection<Comment> Comments { get; set; }
+
+		/// <summary>
+		/// Vrací nebo nastavuje vlákna, která uživatel odebírá.
+		/// </summary>
+		public virtual ICollection<ForumThreadUser> SubscribedForumThreads { get; set; }
 
 		/// <summary>
 		/// Vrací nebo nastavuje kolekci příspevků tohoto uživatele.

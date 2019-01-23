@@ -85,3 +85,28 @@
 	padding-left: 15px;
 	padding-right: 15px;
 }
+
+.commentForm .form-group {
+	margin-bottom: 2px;
+}
+
+.commentForm .card {
+	padding: 0px;
+}
+
+.commentForm .card .card-body {
+	border: 0px;
+	padding: 0px;
+}
+
+.commentForm .card .card-footer {
+	padding: 2px;
+	border: none;
+}
+
+.commentContainer .card-body {
+	padding: 4px;
+}
+
+.commentContainer .card-body .img {
+}

@@ -50,5 +50,16 @@ namespace InternetForum.DL.Entities
 		/// </summary>
 		[Required]
 		public virtual Post Post { get; set; }
+
+		public static Comment Create(string body, string authorId, int postId, DateTime? createdAt = null)
+		{
+			var entity = new Comment();
+			entity.Body = body;
+			entity.CreatedAt = createdAt ?? DateTime.Now;
+			entity.AuthorId = authorId;
+			entity.PostId = postId;
+
+			return entity;
+		}
 	}
 }

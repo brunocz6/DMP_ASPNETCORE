@@ -1,4 +1,5 @@
 ﻿using InternetForum.DL.Entities;
+using ReflectionIT.Mvc.Paging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,9 +42,9 @@ namespace InternetForum.Models
 		/// <summary>
 		/// Vrací nebo nastavuje komentáře příspěvku.
 		/// </summary>
-		public IEnumerable<CommentViewModel> Comments { get; set; }
+		public PagingList<CommentViewModel> Comments { get; set; }
 
-		public static PostViewModel CreateFromEntity(Post post)
+		public static PostViewModel CreateFromEntity(Post post, int commentsPageNumber, int commentsPageSize)
 		{
 			var model = new PostViewModel();
 			model.Id = post.Id;
@@ -52,7 +53,13 @@ namespace InternetForum.Models
 			model.AuthorLink = new LinkViewModel(post.AuthorId, post.Author.UserName);
 			model.CreatedAt = post.CreatedAt;
 			model.ForumThreadLink = new LinkViewModel(post.ForumThreadId, post.ForumThread.Name);
-			model.Comments = post.Comments.Select(c => CommentViewModel.CreateFromEntity(c));
+
+			model.Comments = PagingList.Create
+			(
+				post.Comments.Select(c => CommentViewModel.CreateFromEntity(c)),
+				commentsPageNumber,
+				commentsPageSize
+			);
 
 			return model;
 		}

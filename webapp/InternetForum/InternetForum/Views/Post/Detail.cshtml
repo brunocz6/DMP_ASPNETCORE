@@ -15,7 +15,12 @@
 		<div class="card postDetailContainer">
 			<div class="card-body">
 				<div class="postContentContainer">
-					<h6>@Model.ForumThreadLink.Text <small>Nahráno @Model.CreatedAt uživatelem @Model.AuthorLink.Text</small></h6>
+					<h6>
+						<a asp-action="Index" asp-controller="Home" asp-route-forumThreadId="@Model.ForumThreadLink.Id">@Model.ForumThreadLink.Text</a>
+						<small>
+							• Nahráno @Model.CreatedAt uživatelem @Model.AuthorLink.Text
+						</small>
+					</h6>
 
 					<h4>@Model.Title</h4>
 

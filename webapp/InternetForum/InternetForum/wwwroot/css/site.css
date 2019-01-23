@@ -7,6 +7,10 @@
 	padding-left: 10px;
 }
 
+.postContentContainer a {
+	color: black;
+}
+
 .postContentContainer {
 	min-height: 350px;
 }
@@ -57,6 +61,9 @@
 	padding-left: 10px;
 }
 
+.myPosts_postPreview {
+	margin-bottom: 10px;
+}
 
 .postPreviewContainer .card:hover {
 	border: 1px solid #343a40;
@@ -75,7 +82,7 @@
 	color: inherit;
 }
 
-.commentContainer{
+.comment{
 	margin-bottom: 20px;
 }
 

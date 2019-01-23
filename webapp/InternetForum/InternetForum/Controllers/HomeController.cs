@@ -18,18 +18,21 @@ namespace InternetForum.Controllers
 		{
 		}
 
-		public IActionResult Index(int page = 1)
+		public IActionResult Index(int? forumThreadId, int page = 1)
 		{
-			var mainThreadId = this.unitOfWork.ForumThreadRepository.FirstOrDefault().Id;
+			// Pokud není Id vlákna příspěvků specifikované, využiju první vlákno příspěvků ...
+			var forumThread = forumThreadId.HasValue
+				? this.unitOfWork.ForumThreadRepository.GetById(forumThreadId.Value)
+				: this.unitOfWork.ForumThreadRepository.FirstOrDefault();
 
 			var postsViewModels = this.unitOfWork.PostRepository
-				.GetPostsByForumThreadId(mainThreadId)
+				.GetPostsByForumThreadId(forumThread.Id)
 				.ToList()
 				.Select(p => PostPreviewViewModel.CreateFromEntity(p));
 
 			var pagedPosts = PagingList.Create(postsViewModels, 10, page);
 
-			var model = new HomeIndexViewModel(pagedPosts);
+			var model = new HomeIndexViewModel(pagedPosts, forumThread.Name);
 
 			return View(model);
 		}

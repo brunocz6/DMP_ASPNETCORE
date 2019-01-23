@@ -8,6 +8,10 @@
 	ViewData["Title"] = "Home Page";
 }
 
+<h2> @Model.ForumThreadName </h2>
+
+<br />
+
 <div class="row">
 	<div class="col-md-9 pull-left">
 		@foreach (var post in Model.Posts)

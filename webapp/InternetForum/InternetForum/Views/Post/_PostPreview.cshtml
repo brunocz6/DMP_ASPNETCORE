@@ -8,12 +8,9 @@
 				<div class="row">
 					<div class="col-sm-9">
 						<h6>
-							<a #>@Model.ForumThreadLink.Text</a>
-							@*<a asp-action="Index" asp-controller="ForumThread" asp-route-id="@Model.ForumThreadLink.Id">@Model.ForumThreadLink.Text</a>*@
+							<a asp-action="Index" asp-controller="Home" asp-route-forumThreadId="@Model.ForumThreadLink.Id">@Model.ForumThreadLink.Text</a>
 							<small>
-								• Nahráno @Model.CreatedAt uživatelem
-								<a #>@Model.AuthorLink.Text</a>
-								@*<a asp-action="Detail" asp-controller="User" asp-route-id="@Model.AuthorLink.Id">@Model.AuthorLink.Text</a>*@
+								• Nahráno @Model.CreatedAt uživatelem @Model.AuthorLink.Text
 							</small>
 						</h6>
 					</div>

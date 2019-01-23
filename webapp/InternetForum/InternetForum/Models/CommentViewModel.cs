@@ -19,6 +19,11 @@ namespace InternetForum.Models
 		public string Body { get; set; }
 
 		/// <summary>
+		/// Vrací nebo nastavuje jméno autora tohoto komentáře.
+		/// </summary>
+		public string AuthorUserName { get; set; }
+
+		/// <summary>
 		/// Vrací nebo nastavuje, kdy byl tento komentář vytvořen.
 		/// </summary>
 		public DateTime CreatedAt { get; set; }
@@ -28,6 +33,7 @@ namespace InternetForum.Models
 			var model = new CommentViewModel();
 			model.Id = comment.Id;
 			model.Body = comment.Body;
+			model.AuthorUserName = comment.Author.UserName;
 			model.CreatedAt = comment.CreatedAt;
 
 			return model;

@@ -28,6 +28,10 @@
 		color: white;*/
 }
 
+.comment{
+	margin-bottom: 4px;
+}
+
 .progress{
 	height: 2px;
 }
@@ -82,8 +86,17 @@
 	color: inherit;
 }
 
-.comment{
-	margin-bottom: 20px;
+.forumThreadList_ForumThreadPreview {
+	margin-bottom: 10px;
+}
+
+.forumThreadList_ForumThreadPreview .card-header {
+	height: 50px;
+}
+
+
+.forumThreadList_ForumThreadPreview .card-header a {
+	margin: 0px 0px 0px 5px;
 }
 
 /* Wrapping element */

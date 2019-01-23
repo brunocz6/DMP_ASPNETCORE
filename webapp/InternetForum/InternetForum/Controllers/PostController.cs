@@ -47,7 +47,7 @@ namespace InternetForum.Controllers
 			this.unitOfWork.PostRepository.Add(post);
 			this.unitOfWork.Save();
 
-			return RedirectToAction("Index", "Home", null);
+			return RedirectToAction("Index", "Home");
 		}
 
 		[Authorize]
@@ -68,7 +68,7 @@ namespace InternetForum.Controllers
 			model.UpdateEntity(post);
 			this.unitOfWork.PostRepository.Update(post);
 
-			return RedirectToAction("Index", "Home", null);
+			return RedirectToAction("Index", "Home");
 		}
 
 		public IActionResult Detail(int id, int page = 1)

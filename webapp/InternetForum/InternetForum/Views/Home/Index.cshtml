@@ -8,9 +8,7 @@
 	ViewData["Title"] = "Home Page";
 }
 
-<h2> @Model.ForumThreadName </h2>
-
-<br />
+<h6> @Model.ForumThreadName </h6>
 
 <div class="row">
 	<div class="col-md-9 pull-left">
@@ -18,6 +16,23 @@
 		{
 			Html.RenderPartial("~/Views/Post/_PostPreview.cshtml", post);
 		}
+	</div>
+	<div class="col-md-3">
+		<div class="card">
+			<div class="card-header text-white" style="background-color: #343a40;">
+				Vlákna příspěvků
+			</div>
+			<ul class="list-group list-group-flush">
+				@foreach (var thread in Model.ForumThreads)
+				{
+					<li class="list-group-item redirector">
+						<a asp-action="Index" asp-controller="Home" asp-route-forumThreadId="@thread.Id" style="color: black">
+							@thread.Name
+						</a>
+					</li>
+				}
+			</ul>
+		</div>
 	</div>
 </div>
 

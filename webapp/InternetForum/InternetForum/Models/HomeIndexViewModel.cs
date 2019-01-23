@@ -14,9 +14,11 @@ namespace InternetForum.Models
 
 		}
 
-		public HomeIndexViewModel(PagingList<PostPreviewViewModel> posts, string forumThreadName)
+		public HomeIndexViewModel(PagingList<PostPreviewViewModel> posts,
+			IEnumerable<ForumThreadInfoViewModel> forumThreads, string forumThreadName)
 		{
 			this.Posts = posts;
+			this.ForumThreads = forumThreads;
 			this.ForumThreadName = forumThreadName;
 		}
 
@@ -24,6 +26,11 @@ namespace InternetForum.Models
 		/// Vrací nebo nastavuje název vlákna příspěvků.
 		/// </summary>
 		public string ForumThreadName { get; set; }
+
+		/// <summary>
+		/// Vrací nebo nastavuje kolekci základních informací o vláknech příspěvků.
+		/// </summary>
+		public IEnumerable<ForumThreadInfoViewModel> ForumThreads { get; set; }
 
 		/// <summary>
 		/// Vrací nebo nastavuje kolekci příspěvků.

@@ -38,5 +38,16 @@ namespace InternetForum.DL.Entities
 		/// Vrací nebo nastavuje příspěvky, které jsou součástí tohoto vlákna.
 		/// </summary>
 		public virtual IEnumerable<Post> Posts { get; set; }
+
+		public static ForumThread Create(string name, DateTime createdAt, string description)
+		{
+			var entity = new ForumThread();
+
+			entity.Name = name;
+			entity.CreatedAt = createdAt;
+			entity.Description = description;
+
+			return entity;
+		}
 	}
 }

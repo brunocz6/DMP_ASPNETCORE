@@ -12,6 +12,7 @@ using InternetForum.Models;
 using InternetForum.Services;
 using InternetForum.DL;
 using InternetForum.DL.Entities;
+using ReflectionIT.Mvc.Paging;
 
 namespace InternetForum
 {
@@ -48,6 +49,8 @@ namespace InternetForum
 
 			// Add application services.
 			services.AddTransient<IEmailSender, EmailSender>();
+
+			services.AddPaging();
 
 			services.AddMvc();
 		}

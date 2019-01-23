@@ -1,0 +1,121 @@
+﻿@model InternetForum.Models.PostViewModel
+@{
+	ViewData["Title"] = Model.Title;
+}
+
+
+<div class="row">
+	<div class="col-sm-9">
+		<div class="card postDetailContainer">
+			<div class="card-body">
+				<div class="postContentContainer">
+					<h6>@Model.ForumThreadLink.Text <small>Nahráno @Model.CreatedAt uživatelem @Model.AuthorLink.Text</small></h6>
+
+					<h4>@Model.Title</h4>
+
+					<p>
+						@Model.Body
+					</p>
+				</div>
+
+
+				<form asp-action="Add" asp-controller="Comment" method="post" class="form-horizontal commentForm" role="form">
+					<input type="hidden" name="PostId" value="@Model.Id">
+
+					<div class="card">
+						<div class="card-body">
+							<div class="form-group">
+								<textarea class="form-control" name="body" rows="3" placeholder="Sdílejte váš názor..."></textarea>
+							</div>
+						</div>
+						<div class="card-footer text-muted">
+							<div class="form-group">
+								<button class="btn btn-secondary btn-circle btn-sm commentButton pull-right" type="submit">
+									<span class="glyphicon glyphicon-send">
+										Odeslat
+									</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+
+				<br />
+				<br />
+				<br />
+
+				<h6>Komentáře: </h6>
+
+				<div>
+					@foreach (var comment in Model.Comments)
+					{
+						<div class="card commentContainer">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-2">
+										<img src="https://i.ytimg.com/vi/opKg3fyqWt4/hqdefault.jpg" class="img img-thumbnail" />
+										<p class="text-secondary text-center">@comment.CreatedAt</p>
+									</div>
+									<div class="col-md-10">
+										<p>
+											<a href="https://maniruzzaman-akash.blogspot.com/p/contact.html">
+												<strong>jméno uživatele</strong>
+												@*<strong>@comment.Autho.UserName</strong>*@
+											</a>
+										</p>
+										<p>
+											@comment.Body
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-3">
+		@*<div class="container forumThreadBasicInfoPanel">
+			@{
+				Html.RenderPartial(
+					"~/Views/ForumThread/_InfoPanel.cshtml",
+					new ForumThreadInfoPanelViewModel(
+						Model.ForumThread.Id,
+						Model.ForumThread.Name,
+						Model.ForumThread.Description,
+						ViewBag.ShowSubscribeButton,
+						Model.ForumThread.SubscribersCount
+					)
+				);
+			}
+		</div>*@
+	</div>
+</div>
+
+<style type="text/css">
+	.commentForm .form-group {
+		margin-bottom: 2px;
+	}
+
+	.commentForm .card {
+		padding: 0px;
+	}
+
+		.commentForm .card .card-body {
+			border: 0px;
+			padding: 0px;
+		}
+
+		.commentForm .card .card-footer {
+			padding: 2px;
+			border: none;
+		}
+
+	.commentContainer .card-body {
+		padding: 4px;
+	}
+
+		.commentContainer .card-body .img {
+		}
+</style>

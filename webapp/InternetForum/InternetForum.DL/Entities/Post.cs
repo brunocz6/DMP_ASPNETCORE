@@ -55,6 +55,11 @@ namespace InternetForum.DL.Entities
 		[Required]
 		public virtual ApplicationUser Author { get; set; }
 
+		/// <summary>
+		/// Vrací nebo nastavuje kolekci komentářů tohoto příspěvku.
+		/// </summary>
+		public virtual IEnumerable<Comment> Comments { get; set; }
+
 
 		public static Post Create(string title, string body, DateTime createdAt, string authorId, int forumThreadId)
 		{

@@ -1,5 +1,9 @@
 ﻿@model InternetForum.Models.HomeIndexViewModel
 
+@using ReflectionIT.Mvc.Paging;
+
+@addTagHelper *, ReflectionIt.Mvc.Paging
+
 @{
 	ViewData["Title"] = "Home Page";
 }
@@ -12,6 +16,11 @@
 		}
 	</div>
 </div>
+
+
+<nav>
+	@await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.Posts, @class = "" })
+</nav>
 
 <script type="text/javascript">
 	$(".redirector").click(function () {

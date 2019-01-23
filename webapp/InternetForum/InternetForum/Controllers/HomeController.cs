@@ -8,6 +8,7 @@ using InternetForum.Models;
 using InternetForum.DL;
 using InternetForum.DL.Entities;
 using Microsoft.AspNetCore.Identity;
+using ReflectionIT.Mvc.Paging;
 
 namespace InternetForum.Controllers
 {
@@ -19,11 +20,16 @@ namespace InternetForum.Controllers
 
 		public IActionResult Index(int page = 1)
 		{
-			var posts = this.unitOfWork.PostRepository.GetMostRecentPosts(page, 20);
+			var mainThreadId = this.unitOfWork.ForumThreadRepository.FirstOrDefault().Id;
 
-			var postsViewModels = posts.Select(p => PostPreviewViewModel.CreateFromEntity(p));
+			var postsViewModels = this.unitOfWork.PostRepository
+				.GetPostsByForumThreadId(mainThreadId)
+				.ToList()
+				.Select(p => PostPreviewViewModel.CreateFromEntity(p));
 
-			var model = new HomeIndexViewModel(postsViewModels);
+			var pagedPosts = PagingList.Create(postsViewModels, 10, page);
+
+			var model = new HomeIndexViewModel(pagedPosts);
 
 			return View(model);
 		}

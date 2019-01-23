@@ -60,7 +60,7 @@ namespace InternetForum.DL.Repositories.Interfaces
 		IPagedList<TEntity> Find(Expression<Func<TEntity, bool>> predicate, int pageNumber, int pageSize);
 
 		/// <summary>
-		/// Vrátí query se všemi záznami.
+		/// Vrátí query se záznamy.
 		/// </summary>
 		IQueryable<TEntity> GetAll();
 	}

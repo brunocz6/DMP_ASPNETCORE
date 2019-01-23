@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PagedList;
+using ReflectionIT.Mvc.Paging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ namespace InternetForum.Models
 
 		}
 
-		public HomeIndexViewModel(IEnumerable<PostPreviewViewModel> posts)
+		public HomeIndexViewModel(PagingList<PostPreviewViewModel> posts)
 		{
 			this.Posts = posts;
 		}
@@ -20,6 +22,6 @@ namespace InternetForum.Models
 		/// <summary>
 		/// Vrací nebo nastavuje kolekci příspěvků.
 		/// </summary>
-		public IEnumerable<PostPreviewViewModel> Posts { get; set; }
+		public PagingList<PostPreviewViewModel> Posts { get; set; }
 	}
 }

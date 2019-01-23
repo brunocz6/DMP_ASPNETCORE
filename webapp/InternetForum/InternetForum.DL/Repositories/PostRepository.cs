@@ -12,18 +12,38 @@ namespace InternetForum.DL.Repositories
 	{
 		public PostRepository(InternetForumDbContext dbContext) : base(dbContext)
 		{
-
+	
 		}
 
-		public IEnumerable<Post> GetMostRecentPosts(int page, int pageSize)
+		public IQueryable<Post> GetPostsByForumThreadId(int forumThreadId)
 		{
 			return this.dbContext.Posts.OrderByDescending(p => p.CreatedAt)
-				.ToPagedList(page, pageSize);
+				.Where(p => p.ForumThread.Id == forumThreadId);
 		}
 
-		public IEnumerable<Post> GetUsersPosts(string userId, int pageNumber = 1, int pageSize = 20)
+		public IQueryable<Post> GetUsersPosts(string userId)
 		{
-			return Find(p => p.Author.Id == userId, pageNumber, pageSize);
+			return Find(p => p.Author.Id == userId);
+		}
+
+		public IQueryable<Post> GetPostsOrderedByRecentality()
+		{
+			return this.dbContext.Posts.OrderByDescending(p => p.CreatedAt);
+		}
+
+		public IPagedList<Post> GetPostsOrderedByRecentality(int page, int pageSize)
+		{
+			return GetPostsOrderedByRecentality().ToPagedList(page, pageSize);
+		}
+
+		public IPagedList<Post> GetPostsByForumThreadId(int forumThreadId, int page, int pageSize)
+		{
+			return GetPostsByForumThreadId(forumThreadId).ToPagedList(page, pageSize);
+		}
+
+		public IPagedList<Post> GetUsersPosts(string userId, int pageNumber = 1, int pageSize = 20)
+		{
+			return GetUsersPosts(userId).ToPagedList(pageNumber, pageSize);
 		}
 	}
 }

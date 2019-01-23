@@ -71,23 +71,17 @@ namespace InternetForum.Controllers
 			return RedirectToAction("Index", "Home", null);
 		}
 
-		//public IActionResult Detail(int id)
-		//{
-		//	var post = this.unitOfWork.PostRepository.GetById(id);
+		public IActionResult Detail(int id)
+		{
+			var post = this.unitOfWork.PostRepository.GetById(id);
 
-		//	if (post == null)
-		//		return NotFound();
+			if (post == null)
+				return NotFound();
 
-		//	var model = PostViewModel.CreateFromEntity(post);
+			var model = PostViewModel.CreateFromEntity(post);
 
-
-		//	var user = GetCurrentUser();
-		//	ViewBag.IsUserLoggedIn = user != null;
-		//	ViewBag.ShowSubscribeButton = ViewBag.IsUserLoggedIn &&
-		//		!this.unitOfWork.ForumThreadRepository.IsUserSubscribedToForumThread(user.Id, post.ForumThread.Id);
-
-		//	return View(model);
-		//}
+			return View(model);
+		}
 
 		[HttpPost]
 		[Authorize]

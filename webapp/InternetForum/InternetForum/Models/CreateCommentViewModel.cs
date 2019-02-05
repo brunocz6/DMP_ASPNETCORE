@@ -1,6 +1,7 @@
 ﻿using InternetForum.DL.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,6 +12,9 @@ namespace InternetForum.Models
 		/// <summary>
 		/// Vrací nebo nastavuje obsah komentáře. 
 		/// </summary>
+		[Required]
+		[MinLength(1)]
+		[MaxLength(255)]
 		public string Body { get; set; }
 
 		/// <summary>

@@ -15,19 +15,22 @@ namespace InternetForum.Models
 		/// <summary>
 		/// Vrací nebo nastavuje Id příspěvku.
 		/// </summary>
+		[Required]
 		public int Id { get; set; }
 
 		/// <summary>
 		/// Vrací nebo nastavuje nadpis příspěvku.
 		/// </summary>
-		[MaxLength(100)]
-		[Display(Name = "Nadpis")]
+		[Required]
+		[MinLength(1)]
+		[MaxLength(255)]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Vrací nebo nastavuje obsah příspěvku.
 		/// </summary>
-		[MaxLength(2000)]
+		[Required]
+		[MinLength(1)]
 		[Display(Name = "Obsah")]
 		public string Body { get; set; }
 

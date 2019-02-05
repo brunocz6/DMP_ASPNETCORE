@@ -32,6 +32,7 @@ namespace InternetForum.DL.Entities
 		/// Vrací nebo nastavuje popis vlákna.
 		/// </summary>
 		[Required]
+		[MaxLength(1000)]
 		public string Description { get; set; }
 
 		/// <summary>

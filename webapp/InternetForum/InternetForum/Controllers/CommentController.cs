@@ -20,10 +20,13 @@ namespace InternetForum.Controllers
 
 		public IActionResult Add(CreateCommentViewModel model)
 		{
-			var comment = model.CreateEntity(GetCurrentUserId());
+			if (ModelState.IsValid)
+			{
+				var comment = model.CreateEntity(GetCurrentUserId());
 
-			this.unitOfWork.CommentRepository.Add(comment);
-			this.unitOfWork.Save();
+				this.unitOfWork.CommentRepository.Add(comment);
+				this.unitOfWork.Save();
+			}
 
 			return RedirectToAction("Detail", "Post", new { id = model.PostId });
 		}

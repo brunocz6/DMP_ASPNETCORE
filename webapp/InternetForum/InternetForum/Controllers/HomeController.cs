@@ -25,23 +25,30 @@ namespace InternetForum.Controllers
 				? this.unitOfWork.ForumThreadRepository.GetById(forumThreadId.Value)
 				: this.unitOfWork.ForumThreadRepository.FirstOrDefault();
 
-			var forumThreadInfoPanelViewModel = new ForumThreadInfoPanelViewModel(forumThread.Id, forumThread.Name, forumThread.Description);
+			if (forumThread != null)
+			{
+				var forumThreadInfoPanelViewModel = new ForumThreadInfoPanelViewModel(forumThread.Id, forumThread.Name, forumThread.Description);
 
-			var forumThreadsViewModels = this.unitOfWork.ForumThreadRepository
-				.GetAll()
-				.ToList()
-				.Select(ft => ForumThreadInfoViewModel.CreateFromEntity(ft));
+				var forumThreadsViewModels = this.unitOfWork.ForumThreadRepository
+					.GetAll()
+					.ToList()
+					.Select(ft => ForumThreadInfoViewModel.CreateFromEntity(ft));
 
-			var postsViewModels = this.unitOfWork.PostRepository
-				.GetPostsByForumThreadId(forumThread.Id)
-				.ToList()
-				.Select(p => PostPreviewViewModel.CreateFromEntity(p));
+				var postsViewModels = this.unitOfWork.PostRepository
+					.GetPostsByForumThreadId(forumThread.Id)
+					.ToList()
+					.Select(p => PostPreviewViewModel.CreateFromEntity(p));
 
-			var pagedPosts = PagingList.Create(postsViewModels, 10, page);
+				var pagedPosts = PagingList.Create(postsViewModels, 5, page);
 
-			var model = new HomeIndexViewModel(pagedPosts, forumThreadsViewModels, forumThreadInfoPanelViewModel);
+				var model = new HomeIndexViewModel(pagedPosts, forumThreadsViewModels, forumThreadInfoPanelViewModel);
 
-			return View(model);
+				return View(model);
+			}
+			else
+			{
+				return RedirectToAction(nameof(Index));
+			}
 		}
 	}
 }

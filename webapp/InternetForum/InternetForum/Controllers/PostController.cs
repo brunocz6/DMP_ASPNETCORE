@@ -4,6 +4,7 @@ using InternetForum.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,9 @@ namespace InternetForum.Controllers
 		[Authorize]
 		public IActionResult Create()
 		{
-			var model = new CreatePostViewModel();
+			var forumThreads = this.unitOfWork.ForumThreadRepository.GetAll().ToList();
+
+			var model = new CreatePostViewModel(forumThreads);
 
 			return View(model);
 		}
@@ -41,13 +44,26 @@ namespace InternetForum.Controllers
 		[HttpPost]
 		public IActionResult Create(CreatePostViewModel model)
 		{
-			var forumThreadId = this.unitOfWork.ForumThreadRepository.FirstOrDefault().Id;
-			var post = model.CreateEntity(GetCurrentUser().Id, forumThreadId);
+			if (ModelState.IsValid)
+			{
+				var post = model.CreateEntity(GetCurrentUser().Id);
 
-			this.unitOfWork.PostRepository.Add(post);
-			this.unitOfWork.Save();
+				this.unitOfWork.PostRepository.Add(post);
+				this.unitOfWork.Save();
 
-			return RedirectToAction("Index", "Home");
+				return RedirectToAction("Index", "Home");
+			}
+
+			model.ForumThreads = this.unitOfWork.ForumThreadRepository
+				.GetAll()
+				.ToList()
+				.Select(ft => new SelectListItem()
+				{
+					Text = ft.Name,
+					Value = ft.Id.ToString()
+				});
+
+			return View(model);
 		}
 
 		[Authorize]
@@ -63,12 +79,20 @@ namespace InternetForum.Controllers
 		[HttpPost]
 		public IActionResult Edit(EditPostViewModel model)
 		{
-			var post = this.unitOfWork.PostRepository.GetById(model.Id);
+			if (ModelState.IsValid)
+			{
+				var post = this.unitOfWork.PostRepository.GetById(model.Id);
 
-			model.UpdateEntity(post);
-			this.unitOfWork.PostRepository.Update(post);
+				if (post.AuthorId == GetCurrentUserId())
+				{
+					model.UpdateEntity(post);
+					this.unitOfWork.PostRepository.Update(post);
+				}
 
-			return RedirectToAction("Index", "Home");
+				return RedirectToAction("Index", "Home");
+			}
+
+			return View(model);
 		}
 
 		public IActionResult Detail(int id, int page = 1)

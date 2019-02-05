@@ -4,6 +4,8 @@
 }
 <h2> Vytvořit nové vlákno </h2>
 
+<div asp-validation-summary="All" class="text-danger"></div>
+
 <form asp-action="Create" asp-controller="ForumThread">
 	<div class="form-group">
 		<label asp-for="Name"></label>

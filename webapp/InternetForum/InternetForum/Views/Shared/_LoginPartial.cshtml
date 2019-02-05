@@ -1,4 +1,4 @@
-@using Microsoft.AspNetCore.Identity
+ï»¿@using Microsoft.AspNetCore.Identity
 @using InternetForum.DL.Entities
 
 @inject SignInManager<ApplicationUser> SignInManager
@@ -10,14 +10,14 @@
 		<ul class="navbar-nav pull-right">
 			<li class="nav-item dropdown">
 				<a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown">
-					Vítej, <b class="caret">@UserManager.GetUserName(User)</b>
+					VÃ­tej, <b class="caret">@UserManager.GetUserName(User)</b>
 				</a>
 				<div class="dropdown-menu">
-					<a asp-action="Index" asp-controller="Manage" class="dropdown-item"> Nastavení </a>
-					<a asp-action="MyPosts" asp-controller="Post" class="dropdown-item"> Moje pøíspìvky </a>
+					<a asp-action="Index" asp-controller="Manage" class="dropdown-item"> NastavenÃ­ </a>
+					<a asp-action="MyPosts" asp-controller="Post" class="dropdown-item"> Moje pÅ™Ã­spÄ›vky </a>
 					<hr />
 
-					<button type="submit" class="btn btn-link dropdown-item">Odhlásit se</button>
+					<button type="submit" class="btn btn-link dropdown-item">OdhlÃ¡sit se</button>
 				</div>
 			</li>
 		</ul>
@@ -30,7 +30,7 @@ else
 			<a asp-action="Register" asp-controller="Account" class="nav-link"> Registrace </a>
 		</li>
 		<li class="nav-item">
-			<a asp-action="Login" asp-controller="Account" class="nav-link"> Pøihlásit se </a>
+			<a asp-action="Login" asp-controller="Account" class="nav-link"> PÅ™ihlÃ¡sit se </a>
 		</li>
 	</ul>
 }

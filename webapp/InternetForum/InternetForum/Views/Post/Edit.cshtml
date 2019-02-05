@@ -4,6 +4,8 @@
 }
 <h2> Upravit příspěvek </h2>
 
+<div asp-validation-summary="All" class="text-danger"></div>
+
 <form asp-action="Edit" asp-controller="Post">
 	<div class="form-group">
 		<label asp-for="Title"></label>

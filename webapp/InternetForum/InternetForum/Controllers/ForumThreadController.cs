@@ -38,12 +38,17 @@ namespace InternetForum.Controllers
 		[HttpPost]
 		public IActionResult Create(CreateForumThreadViewModel model)
 		{
-			var forumThread = model.CreateEntity();
+			if (ModelState.IsValid)
+			{
+				var forumThread = model.CreateEntity();
 
-			this.unitOfWork.ForumThreadRepository.Add(forumThread);
-			this.unitOfWork.Save();
+				this.unitOfWork.ForumThreadRepository.Add(forumThread);
+				this.unitOfWork.Save();
 
-			return RedirectToAction("Index","Home");
+				return RedirectToAction("Index", "Home");
+			}
+
+			return View(model);
 		}
 
 		public IActionResult Edit(int id)
@@ -57,12 +62,17 @@ namespace InternetForum.Controllers
 		[HttpPost]
 		public IActionResult Edit(EditForumThreadViewModel model)
 		{
-			var forumThread = this.unitOfWork.ForumThreadRepository.GetById(model.Id);
+			if (ModelState.IsValid)
+			{
+				var forumThread = this.unitOfWork.ForumThreadRepository.GetById(model.Id);
 
-			model.UpdateEntity(forumThread);
-			this.unitOfWork.ForumThreadRepository.Update(forumThread);
+				model.UpdateEntity(forumThread);
+				this.unitOfWork.ForumThreadRepository.Update(forumThread);
 
-			return RedirectToAction("List", "ForumThread");
+				return RedirectToAction("List", "ForumThread");
+			}
+
+			return View(model);
 		}
 
 		[HttpPost]

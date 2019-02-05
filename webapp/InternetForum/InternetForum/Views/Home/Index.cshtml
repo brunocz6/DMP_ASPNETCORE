@@ -29,7 +29,7 @@
 			<ul class="list-group list-group-flush">
 				@foreach (var thread in Model.ForumThreads)
 				{
-					<li class="list-group-item redirector">
+					<li class="list-group-item">
 						<a asp-action="Index" asp-controller="Home" asp-route-forumThreadId="@thread.Id" style="color: black">
 							@thread.Name
 						</a>
@@ -44,9 +44,3 @@
 <nav>
 	@await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.Posts })
 </nav>
-
-<script type="text/javascript">
-	$(".redirector").click(function () {
-		window.location = this.dataset.url;
-	});
-</script>

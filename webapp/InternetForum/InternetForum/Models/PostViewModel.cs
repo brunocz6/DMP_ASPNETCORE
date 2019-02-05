@@ -56,7 +56,12 @@ namespace InternetForum.Models
 
 			model.Comments = PagingList.Create
 			(
-				post.Comments.ToList().Select(c => CommentViewModel.CreateFromEntity(c)),
+				post.Comments
+				.ToList()
+				.OrderByDescending(c => c.CreatedAt)
+				.Select(c =>
+					CommentViewModel.CreateFromEntity(c)
+				),
 				commentsPageSize,
 				commentsPageNumber
 			);

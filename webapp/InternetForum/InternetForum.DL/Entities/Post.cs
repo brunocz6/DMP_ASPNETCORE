@@ -18,6 +18,7 @@ namespace InternetForum.DL.Entities
 		/// Vrací nebo nastavuje nadpis příspěvku.
 		/// </summary>
 		[Required]
+		[MaxLength(255)]
 		public string Title { get; set; }
 
 		/// <summary>

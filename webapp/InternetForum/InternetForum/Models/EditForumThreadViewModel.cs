@@ -12,18 +12,25 @@ namespace InternetForum.Models
 		/// <summary>
 		/// Vrací nebo nastavuje Id příspěvku.
 		/// </summary>
+		[Required]
 		public int Id { get; set; }
 
 		/// <summary>
 		/// Vrací nebo nastavuje název vlákna příspěvků.
 		/// </summary>
+		[MinLength(1)]
 		[Display(Name = "Název")]
+		[Required]
+		[MaxLength(100)]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// Vrací nebo nastavuje popis vlákna.
 		/// </summary>
+		[MinLength(1)]
 		[Display(Name = "Popis")]
+		[Required]
+		[MaxLength(1000)]
 		public string Description { get; set; }
 
 		public static EditForumThreadViewModel CreateFromEntity(ForumThread entity)

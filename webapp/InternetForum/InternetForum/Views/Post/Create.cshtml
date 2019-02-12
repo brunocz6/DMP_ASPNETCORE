@@ -10,7 +10,12 @@
 
 	<div class="form-group">
 		<label asp-for="ForumThreadId"></label>
-		<select asp-for="ForumThreadId" asp-items="Model.ForumThreads" id="forumThreadSelect" class="form-control"></select>
+		@* 
+			Výběrové kole pro vybrání položku z kolekce
+			(každá položka výběrového pole je typu SelectListItem) 
+		*@
+		<select asp-for="ForumThreadId" asp-items="Model.ForumThreads" id="forumThreadSelect" class="form-control">
+		</select>
 	</div>
 
 	<div class="form-group">
